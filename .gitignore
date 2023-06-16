@@ -1,2 +1,26 @@
 #vs code settings
 settings.json
+.vscode/
+
+# python generate files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# virtual env
+venv/
+env/
+ENV/
+
+# log
+*.log
+
+
+# env files
+*.env
+
+# libs
+lib/
+lib64/
+bin/
