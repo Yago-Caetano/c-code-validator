@@ -6,8 +6,8 @@ from enums.target_enum import TargetEnum
 class RuleModel:
 
     def __init__(self,target: TargetEnum, criterion: CriterionEnum) -> None:
-        self.__target = TargetEnum.TARGET_NONE
-        self.__criterion = CriterionEnum.NONE
+        self.__target = target
+        self.__criterion = criterion
 
     def get_criterion(self) -> CriterionEnum:
         return self.__criterion
