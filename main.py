@@ -1,4 +1,7 @@
 import os
+import argparse
+
+from tqdm import tqdm
 
 from parsers.code_parser import CodeParser
 from parsers.rule_parser import RuleParser
@@ -8,19 +11,20 @@ from utlis.files_utils import search_files_by_keyword
 
 ruleParser = RuleParser()
 
-def startup():
+def startup(files,rules_directory):
+    print_process("Own C Validator")
     print_process("Reading rules")
 
     #check all rules
-    local_dir = os.getcwd() + "/rules"
+    #local_dir = os.getcwd() + "/rules"
 
-    ret_files = search_files_by_keyword(local_dir,"rule","json")
+    ret_files = search_files_by_keyword(rules_directory,"rule","json")
 
     rules = []
-
-    for file in ret_files:
+    pbar = tqdm(ret_files)
+    for file in pbar:
         try:
-            print_process(f'Reading rule: {file}')
+            pbar.set_description(f'Reading rule: {file}')
             rules.append(ruleParser.parse_file(file))
         except Exception as e:
             print_exception(e)
@@ -30,10 +34,12 @@ def startup():
     print_success("Rules read successfully")
 
     #with this rules, let's check target files
-    code_files = search_files_by_keyword(os.getcwd(),"code","c")
     try:
         code_parser = CodeParser(rules)
-        for code in code_files:
+        pbar = tqdm(files)
+
+        for code in pbar:
+            pbar.set_description(f"{code}")
             code_parser.parse_code_file(code)
         print_success("Finalizado")
     except Exception as e:
@@ -42,5 +48,18 @@ def startup():
 def execute():
     pass
 
+def main():
+    parser = argparse.ArgumentParser(description="Own C sintax validator")
+    parser.add_argument("--input","-i",nargs="+",help="List of C files to analyse",required=True)
+    parser.add_argument("--rules_path","-r",help="Path to rules",required=True)
 
-startup()
+    args = parser.parse_args()
+
+    in_files = args.input
+    rules_path = args.rules_path
+
+    startup(in_files,rules_path)
+
+
+if __name__ == "__main__":
+    main()

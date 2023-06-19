@@ -29,7 +29,7 @@ class CodeParser():
       criterion = rule.get_criterion()
 
       if(criterion[CriterionKeys.HANDLER] is not None):
-        criterion[CriterionKeys.HANDLER](node,criterion[CriterionKeys.VALUE_TO_CHECK])
+        criterion[CriterionKeys.HANDLER](node,rule,criterion[CriterionKeys.VALUE_TO_CHECK])
 
 
   def __parse_node_recursively(self,node):
@@ -50,7 +50,6 @@ class CodeParser():
 
 
   def parse_code_file(self,file):
-    print_process(f"Checking: {file}")
     index = Index.create()
     tu = index.parse(file)
     self.__parse_node_recursively(tu.cursor)

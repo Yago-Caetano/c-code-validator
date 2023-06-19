@@ -1,6 +1,12 @@
 class RulesReservedKeys():
 
     '''
+        Rule basic details
+    '''
+    RULE_NAME = "name"
+    RULE_DESCRIPTION = "description"
+
+    '''
         Target keys
     '''
     TARGET_NAME = "target"

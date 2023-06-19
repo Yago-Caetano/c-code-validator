@@ -10,8 +10,8 @@ from exceptions.invalid_criterion_exception import InvalidCriterionException
 from exceptions.invalid_target_exception import InvalidTargetException
 from exceptions.rule_missing_criterion_exception import RuleMissingCriterionException
 
-from exceptions.rule_missing_target_exception import RuleMissingTargetException
 from models.rule_model import RuleModel
+from exceptions.rule_missing_target_exception import RuleMissingTargetException
 
 
 class RuleParser():
@@ -44,11 +44,16 @@ class RuleParser():
 
             target = None
             criterion = None
+            name = "unamed"
+            file_name = path
 
-            if(j_rule[RulesReservedKeys.TARGET_NAME] is None):
+            if(RulesReservedKeys.RULE_NAME in j_rule):
+                name = j_rule[RulesReservedKeys.RULE_NAME]
+
+            if(not (RulesReservedKeys.TARGET_NAME in j_rule)):
                 raise RuleMissingTargetException()
             
-            if(j_rule[RulesReservedKeys.CRITERION_OBJ_KEY] is None):
+            if(not (RulesReservedKeys.CRITERION_OBJ_KEY in j_rule)):
                 raise RuleMissingCriterionException()
             
             found_target = None
@@ -63,7 +68,7 @@ class RuleParser():
             
             criterion = copy.deepcopy(self.__parse_criterion(j_rule[RulesReservedKeys.CRITERION_OBJ_KEY]))
         
-            ret_rule = RuleModel(found_target,criterion)
+            ret_rule = RuleModel(name,file_name,found_target,criterion)
 
             return ret_rule
             
