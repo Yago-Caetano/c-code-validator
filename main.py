@@ -2,25 +2,27 @@ import os
 import argparse
 
 from tqdm import tqdm
+from constants.strings import StringsConstants
 
 from parsers.code_parser import CodeParser
 from parsers.rule_parser import RuleParser
-from utlis.console_utils import  print_exception, print_failure, print_process, print_success
+from utlis.console_utils import  print_exception, print_failure, print_header, print_process, print_success
 from utlis.files_utils import search_files_by_keyword
 
 
 ruleParser = RuleParser()
 
 def startup(files,rules_directory):
-    print_process("Own C Validator")
-    print_process("Reading rules")
-
-    #check all rules
-    #local_dir = os.getcwd() + "/rules"
-
+    print_header()
+    print_process(StringsConstants.PARSING_RULES_TITLE)
+    
+    rules = []
     ret_files = search_files_by_keyword(rules_directory,"rule","json")
 
-    rules = []
+    if(len(ret_files) == 0):
+        print_failure(StringsConstants.NO_RULES_FOUND)
+        return
+    
     pbar = tqdm(ret_files)
     for file in pbar:
         try:
@@ -28,20 +30,21 @@ def startup(files,rules_directory):
             rules.append(ruleParser.parse_file(file))
         except Exception as e:
             print_exception(e)
-            print_failure("Cannot read rules")
+            print_failure(StringsConstants.RULE_PARSING_FAILED)
             return
 
-    print_success("Rules read successfully")
+    print_success(StringsConstants.RULE_PARSING_SUCCEDED)
 
-    #with this rules, let's check target files
     try:
+        print_process(StringsConstants.CODE_CHECKING_TITLE)
+
         code_parser = CodeParser(rules)
         pbar = tqdm(files)
 
         for code in pbar:
             pbar.set_description(f"{code}")
             code_parser.parse_code_file(code)
-        print_success("Finalizado")
+        print_success(StringsConstants.CODE_CHECKING_SUCCEDED)
     except Exception as e:
         print_exception(e)
 
@@ -49,7 +52,7 @@ def execute():
     pass
 
 def main():
-    parser = argparse.ArgumentParser(description="Own C sintax validator")
+    parser = argparse.ArgumentParser(description=StringsConstants.TITLE)
     parser.add_argument("--input","-i",nargs="+",help="List of C files to analyse",required=True)
     parser.add_argument("--rules_path","-r",help="Path to rules",required=True)
 
