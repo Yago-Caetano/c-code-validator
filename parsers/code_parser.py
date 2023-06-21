@@ -16,12 +16,8 @@ class CodeParser():
    
   def __init__(self,rules) -> None:
     self.__OS_PLATFORM = platform.system()
-
-    if self.__OS_PLATFORM == "Windows":  
-      clang.cindex.Config.set_library_file('C:/Program Files/LLVM/bin/libclang.dll')
-    else:
-      clang.cindex.Config.set_library_file('/usr/lib/llvm-6.0/lib/libclang.so.1')
-
+    clang.cindex.Config.set_library_path(os.getenv("LIBCLANG_LIBRARY_PATH"))
+    
     self.__rules = rules
 
 

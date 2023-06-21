@@ -3,6 +3,7 @@ import argparse
 
 from tqdm import tqdm
 from constants.strings import StringsConstants
+from exceptions.lib_clang_not_found_exception import LibClangNotFoundException
 
 from parsers.code_parser import CodeParser
 from parsers.rule_parser import RuleParser
@@ -12,7 +13,17 @@ from utlis.files_utils import search_files_by_keyword
 
 ruleParser = RuleParser()
 
+def check_prerequisites():
+
+    #check if there is libclang environment variable
+    if (os.environ.get('LIBCLANG_LIBRARY_PATH') is None):
+        raise LibClangNotFoundException()
+    
+
 def startup(files,rules_directory):
+
+    check_prerequisites()
+
     print_header()
     print_process(StringsConstants.PARSING_RULES_TITLE)
     
