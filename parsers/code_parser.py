@@ -53,15 +53,15 @@ class CodeParser():
 
                 if(node.linkage in rule_target[TargetKeys.CLANG_LINKAGE_KIND]):
 
-                  if(rule_target[TargetKeys.CLANG_ACCESS_KIND] is not None):
+                  if(rule_target[TargetKeys.CLANG_PARENT_KIND] is not None):
 
-                    if node.access_specifier in rule_target[TargetKeys.CLANG_ACCESS_KIND]:
+                    if node.lexical_parent.kind in rule_target[TargetKeys.CLANG_PARENT_KIND]:
                       self.__check_rule_compliance(node,rule)
 
                   else:
 
                     self.__check_rule_compliance(node,rule)
-                    
+
               else:
                 self.__check_rule_compliance(node,rule)
 
