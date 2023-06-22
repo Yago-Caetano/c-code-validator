@@ -56,14 +56,13 @@ class RuleParser():
             if(not (RulesReservedKeys.CRITERION_OBJ_KEY in j_rule)):
                 raise RuleMissingCriterionException()
             
-            found_target = None
+            found_target = []
 
             for target in TargetEnum:
-                if target.value[TargetKeys.VALUE_IN_RULE] == j_rule[RulesReservedKeys.TARGET_NAME]:
-                    found_target = target.value
-                    break
+                if (target.value[TargetKeys.VALUE_IN_RULE] in j_rule[RulesReservedKeys.TARGET_NAME]):
+                    found_target.append(target.value)
 
-            if(found_target is None):
+            if(len(found_target) == 0):
                 raise InvalidTargetException()
             
             criterion = copy.deepcopy(self.__parse_criterion(j_rule[RulesReservedKeys.CRITERION_OBJ_KEY]))

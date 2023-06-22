@@ -5,7 +5,7 @@ from enums.target_enum import TargetEnum
 
 class RuleModel:
 
-    def __init__(self,name,file_name,target: TargetEnum, criterion: CriterionEnum) -> None:
+    def __init__(self,name,file_name,target: list, criterion: CriterionEnum) -> None:
         self.__target = target
         self.__criterion = criterion
         self.__name = name
@@ -14,7 +14,7 @@ class RuleModel:
     def get_criterion(self) -> CriterionEnum:
         return self.__criterion
     
-    def get_target(self) -> TargetEnum:
+    def get_target(self) -> list:
         return self.__target
     
     def get_name(self):

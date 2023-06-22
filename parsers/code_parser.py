@@ -2,7 +2,7 @@ import os
 import platform
 
 import clang.cindex
-from clang.cindex import Index,LinkageKind
+from clang.cindex import Index,LinkageKind,CursorKind
 
 from clang.cindex import TypeKind
 
@@ -27,25 +27,55 @@ class CodeParser():
       if(criterion[CriterionKeys.HANDLER] is not None):
         criterion[CriterionKeys.HANDLER](node,rule,criterion[CriterionKeys.VALUE_TO_CHECK])
 
+  def __is_this_node_able_be_checked(self,node):
+    if(node.kind != CursorKind.MACRO_DEFINITION):
+      #only accept local macro definitions
+      if(node.location.file != None):
+        return True
+      else:
+        return False
+    else:
+      if(node.linkage != LinkageKind.INVALID):
+        return True
+      else:
+        return False
+
 
   def __parse_node_recursively(self,node):
       
-      if(node.linkage != LinkageKind.INVALID):
-        #print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier}')
+      if(self.__is_this_node_able_be_checked(node)):
+        print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier}')
         for rule in self.__rules:
-          if(node.kind in rule.get_target()[TargetKeys.CLANG_KINDS]):
-            if(node.linkage in rule.get_target()[TargetKeys.CLANG_LINKAGE_KIND]):
-              if(rule.get_target()[TargetKeys.CLANG_ACCESS_KIND] is not None):
-                if node.access_specifier in rule.get_target()[TargetKeys.CLANG_ACCESS_KIND]:
-                  self.__check_rule_compliance(node,rule)
+          for rule_target in rule.get_target():
+            if(node.kind in rule_target[TargetKeys.CLANG_KINDS]):
+
+              if(rule_target[TargetKeys.CLANG_LINKAGE_KIND] != None):
+
+                if(node.linkage in rule_target[TargetKeys.CLANG_LINKAGE_KIND]):
+
+                  if(rule_target[TargetKeys.CLANG_ACCESS_KIND] is not None):
+
+                    if node.access_specifier in rule_target[TargetKeys.CLANG_ACCESS_KIND]:
+                      self.__check_rule_compliance(node,rule)
+
+                  else:
+
+                    self.__check_rule_compliance(node,rule)
+                    
               else:
                 self.__check_rule_compliance(node,rule)
 
+      '''try:            
+        print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier} -- localidade: {node.location}')
+      except:
+        pass
+      '''
+      
       for c in node.get_children():
         self.__parse_node_recursively(c)
 
 
   def parse_code_file(self,file):
     index = Index.create()
-    tu = index.parse(file)
+    tu = index.parse(file,options=clang.cindex.TranslationUnit.PARSE_DETAILED_PROCESSING_RECORD)
     self.__parse_node_recursively(tu.cursor)
