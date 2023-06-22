@@ -28,7 +28,7 @@ class CodeParser():
         criterion[CriterionKeys.HANDLER](node,rule,criterion[CriterionKeys.VALUE_TO_CHECK])
 
   def __is_this_node_able_be_checked(self,node):
-    if(node.kind != CursorKind.MACRO_DEFINITION):
+    if((node.kind == CursorKind.MACRO_DEFINITION) or (node.kind == CursorKind.MACRO_INSTANTIATION)):
       #only accept local macro definitions
       if(node.location.file != None):
         return True
@@ -44,7 +44,7 @@ class CodeParser():
   def __parse_node_recursively(self,node):
       
       if(self.__is_this_node_able_be_checked(node)):
-        print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier}')
+        #print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier}')
         for rule in self.__rules:
           for rule_target in rule.get_target():
             if(node.kind in rule_target[TargetKeys.CLANG_KINDS]):
@@ -65,11 +65,6 @@ class CodeParser():
               else:
                 self.__check_rule_compliance(node,rule)
 
-      '''try:            
-        print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier} -- localidade: {node.location}')
-      except:
-        pass
-      '''
       
       for c in node.get_children():
         self.__parse_node_recursively(c)

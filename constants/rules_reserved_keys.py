@@ -33,4 +33,5 @@ class RulesReservedKeys():
     LENGTH_BIGGER_THAN = "length_bigger_than"
     PREFIX = "prefix"
     SUFFIX = "suffix"
+    REGEX = "regex"
 
