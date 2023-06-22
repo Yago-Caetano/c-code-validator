@@ -18,7 +18,6 @@ def print_header():
 def print_error(error_msg):
     print(Fore.RED + f"\r\n{error_msg}\r\n")
     print(Style.RESET_ALL)
-    print_line_of_hashes()
 
 def print_success(msg):
     print(Fore.GREEN + f"\r\n{msg}\r\n")
@@ -34,7 +33,6 @@ def print_process(msg):
 def print_exception(e:Exception):
     print(Fore.RED + f"\r\n{str(e)}\r\n")
     print(Style.RESET_ALL)
-    print_line_of_hashes()
 
 def print_failure(msg):
     print(f"\r\n{msg}\r\n")
