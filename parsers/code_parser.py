@@ -103,11 +103,12 @@ class CodeParser():
                 if(self.__check_rule_requirements(rule_target[TargetKeys.REQUIREMENTS],node)):
                   self.__check_rule_compliance(node,rule)
 
-      try:
+      '''try:
         print(f'nome: {node.displayname} - - kind: {node.kind} tipo: {node.type.kind } -- acessibilidade: {node.access_specifier}')
       except:
         pass
-
+      '''
+      
       for c in node.get_children():
         self.__parse_node_recursively(c)
 

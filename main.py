@@ -1,5 +1,6 @@
 import os
 import argparse
+import glob
 
 from tqdm import tqdm
 from constants.strings import StringsConstants
@@ -82,7 +83,20 @@ def main():
 
     args = parser.parse_args()
 
-    in_files = args.input
+    in_files = []
+
+    for input_record in args.input:
+
+        # Check if the argument contains wildcard characters
+        if '*' in input_record or '?' in input_record:
+            # Use glob to get a list of matching file paths
+            file_paths = glob.glob(input_record)
+            for file_path in file_paths:
+                in_files.append(file_path)
+
+        else:
+            in_files.append(input_record)
+
     rules_path = args.rules_path
 
     return startup(in_files,rules_path)
