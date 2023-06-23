@@ -67,7 +67,7 @@ class RuleParser():
             
             criterion = copy.deepcopy(self.__parse_criterion(j_rule[RulesReservedKeys.CRITERION_OBJ_KEY]))
         
-            ret_rule = RuleModel(name,file_name,found_target,criterion)
+            ret_rule = RuleModel(name,file_name,j_rule[RulesReservedKeys.RULE_DESCRIPTION],found_target,criterion)
 
             return ret_rule
             

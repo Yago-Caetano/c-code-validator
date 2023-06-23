@@ -5,11 +5,12 @@ from enums.target_enum import TargetEnum
 
 class RuleModel:
 
-    def __init__(self,name,file_name,target: list, criterion: CriterionEnum) -> None:
+    def __init__(self,name,file_name, description, target: list, criterion: CriterionEnum) -> None:
         self.__target = target
         self.__criterion = criterion
         self.__name = name
         self.__file_name = file_name
+        self.__description = description
 
     def get_criterion(self) -> CriterionEnum:
         return self.__criterion
@@ -22,6 +23,9 @@ class RuleModel:
     
     def get_file_name(self):
         return self.__file_name
+    
+    def get_description(self):
+        return self.__description
 
     def on_success():
         pass
