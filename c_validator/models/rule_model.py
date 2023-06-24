@@ -1,6 +1,6 @@
 
-from enums.criterion_enum import CriterionEnum
-from enums.target_enum import TargetEnum
+from c_validator.enums.criterion_enum import CriterionEnum
+from c_validator.enums.target_enum import TargetEnum
 
 
 class RuleModel:

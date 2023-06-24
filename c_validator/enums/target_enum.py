@@ -1,9 +1,9 @@
 from enum import Enum
 
 from clang.cindex import CursorKind,LinkageKind,AccessSpecifier
-from constants.rules_reserved_keys import RulesReservedKeys
+from c_validator.constants.rules_reserved_keys import RulesReservedKeys
 
-from constants.target_keys import TargetKeys
+from c_validator.constants.target_keys import TargetKeys
 
 class TargetEnum(Enum):
     TARGET_NONE = {TargetKeys.VALUE_IN_RULE: RulesReservedKeys.TARGET_TYPE_NONE,TargetKeys.CLANG_KINDS:[],TargetKeys.CLANG_LINKAGE_KIND:None,TargetKeys.CLANG_ACCESS_KIND:None}

@@ -1,8 +1,8 @@
 from enum import Enum
-from constants.criterion_keys import CriterionKeys
-from constants.rules_reserved_keys import RulesReservedKeys
+from c_validator.constants.criterion_keys import CriterionKeys
+from c_validator.constants.rules_reserved_keys import RulesReservedKeys
 
-from handlers.criterion_handlers import criterion_handler_lenght_bigger_than, criterion_handler_lenght_less_than, criterion_handler_prefix, criterion_handler_regex, criterion_handler_suffix
+from c_validator.handlers.criterion_handlers import criterion_handler_lenght_bigger_than, criterion_handler_lenght_less_than, criterion_handler_prefix, criterion_handler_regex, criterion_handler_suffix
 
 class CriterionEnum(Enum):
     NONE = {CriterionKeys.VALUE_IN_RULE: RulesReservedKeys.NONE ,CriterionKeys.REQUIRE_VALUE:False, CriterionKeys.VALUE_TO_CHECK:None,CriterionKeys.HANDLER:None}

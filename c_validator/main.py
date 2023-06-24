@@ -1,23 +1,44 @@
 import os
 import argparse
 import glob
+import platform
 
 from tqdm import tqdm
-from constants.strings import StringsConstants
-from exceptions.lib_clang_not_found_exception import LibClangNotFoundException
+from c_validator.constants.strings import StringsConstants
+from c_validator.exceptions.lib_clang_not_found_exception import LibClangNotFoundException
 
-from parsers.code_parser import CodeParser
-from parsers.rule_parser import RuleParser
-from utlis.console_utils import  print_exception, print_failure, print_header, print_process, print_success
-from utlis.files_utils import search_files_by_keyword
+from c_validator.parsers.code_parser import CodeParser
+from c_validator.parsers.rule_parser import RuleParser
+from c_validator.utlis.console_utils import  print_exception, print_failure, print_header, print_process, print_success
+from c_validator.utlis.files_utils import search_files_by_keyword
 
 
 ruleParser = RuleParser()
 
+def is_libclang_available():
+    path_env = os.getenv("PATH")
+    platform_name = platform.system()
+
+    if path_env:
+        paths = path_env.split(os.pathsep)
+        for path in paths:
+
+            if(platform_name == "Windows"):
+                libclang_path = os.path.join(path, "libclang.dll")  
+                if os.path.isfile(libclang_path):
+                    return True
+            else:
+                libclang_path = os.path.join(path, "libclang.so")  
+                if os.path.isfile(libclang_path):
+                    return True
+    return False
+
+
+
 def check_prerequisites():
 
     #check if there is libclang environment variable
-    if (os.environ.get('LIBCLANG_LIBRARY_PATH') is None):
+    if (is_libclang_available() == False):
         raise LibClangNotFoundException()
     
 

@@ -1,7 +1,7 @@
 from art import text2art
 from colorama import Fore, Back, Style
 
-from constants.strings import StringsConstants
+from c_validator.constants.strings import StringsConstants
 import shutil
 
 

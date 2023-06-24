@@ -1,4 +1,4 @@
-from exceptions.criterion_not_respected_exception import  CriterionNotRespectedException
+from c_validator.exceptions.criterion_not_respected_exception import  CriterionNotRespectedException
 import re
 
 def criterion_handler_lenght_less_than(node,rule,length):

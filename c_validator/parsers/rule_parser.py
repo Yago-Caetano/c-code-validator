@@ -1,17 +1,17 @@
 import copy
 import json
-from constants.criterion_keys import CriterionKeys
-from constants.rules_reserved_keys import RulesReservedKeys
-from constants.target_keys import TargetKeys
-from enums.criterion_enum import CriterionEnum
-from enums.target_enum import TargetEnum
-from exceptions.criterion_value_missing_exception import CriterionValueMissingException
-from exceptions.invalid_criterion_exception import InvalidCriterionException
-from exceptions.invalid_target_exception import InvalidTargetException
-from exceptions.rule_missing_criterion_exception import RuleMissingCriterionException
+from c_validator.constants.criterion_keys import CriterionKeys
+from c_validator.constants.rules_reserved_keys import RulesReservedKeys
+from c_validator.constants.target_keys import TargetKeys
+from c_validator.enums.criterion_enum import CriterionEnum
+from c_validator.enums.target_enum import TargetEnum
+from c_validator.exceptions.criterion_value_missing_exception import CriterionValueMissingException
+from c_validator.exceptions.invalid_criterion_exception import InvalidCriterionException
+from c_validator.exceptions.invalid_target_exception import InvalidTargetException
+from c_validator.exceptions.rule_missing_criterion_exception import RuleMissingCriterionException
 
-from models.rule_model import RuleModel
-from exceptions.rule_missing_target_exception import RuleMissingTargetException
+from c_validator.models.rule_model import RuleModel
+from c_validator.exceptions.rule_missing_target_exception import RuleMissingTargetException
 
 
 class RuleParser():

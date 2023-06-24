@@ -7,16 +7,16 @@ from clang.cindex import Index,LinkageKind,CursorKind
 from clang.cindex import TypeKind
 
 import clang.enumerations
-from constants.criterion_keys import CriterionKeys
+from c_validator.constants.criterion_keys import CriterionKeys
 
-from constants.target_keys import TargetKeys
-from utlis.console_utils import print_process
+from c_validator.constants.target_keys import TargetKeys
+from c_validator.utlis.console_utils import print_process
 
 class CodeParser():
    
   def __init__(self,rules) -> None:
     self.__OS_PLATFORM = platform.system()
-    clang.cindex.Config.set_library_path(os.getenv("LIBCLANG_LIBRARY_PATH"))
+    #clang.cindex.Config.set_library_path(os.getenv("LIBCLANG_LIBRARY_PATH"))
     
     self.__rules = rules
 
