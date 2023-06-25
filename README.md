@@ -1,6 +1,5 @@
 # C-Syntax-Validator
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 
 A custom syntax validator for the C language, which allows you to create custom rules to validate code.
@@ -10,9 +9,8 @@ It is a useful tool to verify that the developed code is in accordance with the 
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
+- [How it works](#how-it-works)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -27,6 +25,15 @@ pip install -r requirements.txt
 
 ## Usage
 
+A typical use of this tool is shown below.
+
+```
+     c-validator --input {files or directory to check} -r {folder where rules are declared}
+```
+
+
+## How it works?
+
 ### Understanding rules files
 
 Rules are abstractions of your team's commitments or agreements. In practice, it is a JSON file with reserved keys to indicate what do you want to check.
@@ -34,7 +41,7 @@ Rules are abstractions of your team's commitments or agreements. In practice, it
 
 #### Rule format
 
-Rule file can be understood easily splitting the file on two parts. The first one describe the [target](#accepted-criterion-target-values) of this rule, what do you want to verify, to be precise what kind of token do you want to check (e.g: Variables, macros, functions, etc.).
+Rule file can be understood easily splitting the file on two parts. The first one describe the [target](#accepted-target-values) of this rule, what do you want to verify, to be precise what kind of token do you want to check (e.g: Variables, macros, functions, etc.).
 
 
 The second part, is about the **criterion** that you want to use to validade the target token. An object is used to agrupate criterion data.
@@ -86,8 +93,21 @@ It's a simple JSON object with two reserved keys, **target** to indicate what ki
 |   "variables"      |   This rule target are the local variables                 |
 |   "macros"          |  This rule target are Macros declarations                     |
 
-## Features
-
-
 
 ## Contributing
+
+Thank you for your interest in contributing to this project! We welcome contributions from the community, as they help make this project better.
+
+To contribute, please follow these guidelines:
+
+1. Fork the repository and create your own branch for your contributions.
+2. Make your changes or additions in the branch.
+3. Ensure that your code adheres to the project's coding standards and conventions.
+4. Test your changes thoroughly.
+5. Document any new features or changes in the appropriate sections of the project's documentation.
+6. Submit a pull request with your changes, providing a clear and descriptive explanation of the purpose and scope of the pull request.
+7. Once submitted, the project maintainers will review your pull request and provide feedback or merge it if appropriate.
+
+Please note that by contributing to this project, you agree to abide by the project's code of conduct (if applicable).
+
+If you're unsure about anything or have any questions, feel free to open an issue or contact the project maintainers. We appreciate your contributions and look forward to working with you!
