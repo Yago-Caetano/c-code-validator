@@ -7,10 +7,10 @@ from clang.cindex import Index,LinkageKind,CursorKind
 from clang.cindex import TypeKind
 
 import clang.enumerations
-from c_validator.constants.criterion_keys import CriterionKeys
+from c_custom_code_checker.constants.criterion_keys import CriterionKeys
 
-from c_validator.constants.target_keys import TargetKeys
-from c_validator.utlis.console_utils import print_process
+from c_custom_code_checker.constants.target_keys import TargetKeys
+from c_custom_code_checker.utlis.console_utils import print_process
 
 class CodeParser():
    

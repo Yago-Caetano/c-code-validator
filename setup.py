@@ -9,7 +9,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'c-validator= c_validator:main',
+            'c-validator= c_custom_code_checker:main',
         ],
     },
     install_requires=requirements,

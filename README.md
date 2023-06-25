@@ -1,4 +1,4 @@
-# C-Syntax-Validator
+# c-custom-code-checker
 
 [![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
 
