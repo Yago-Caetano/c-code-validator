@@ -14,6 +14,10 @@ It is a useful tool to verify that the developed code is in accordance with the 
 
 ## Installation
 
+### Requirements
+
+#### Clang
+
 This project use [libclang](https://github.com/llvm/llvm-project/releases/) tools to handle with C files and to create the AST. You need to install it, and set libclang installation path on PATH environment variable 
 
 
@@ -21,7 +25,18 @@ This project use [libclang](https://github.com/llvm/llvm-project/releases/) tool
 
 ```bash
 pip install -r requirements.txt
+
 ```
+
+### Installing by pip
+
+This project is available on pip repository, you just have to write the follow command
+
+```
+    pip install c-custom-code-checker
+
+```
+
 
 ## Usage
 
