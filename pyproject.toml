@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "c_custom_code_checker"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
   { name="Yago Caetano", email="yago_caetano@outlook.com" },
 ]
