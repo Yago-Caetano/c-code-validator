@@ -34,7 +34,7 @@ Rules are abstractions of your team's commitments or agreements. In practice, it
 
 #### Rule format
 
-Rule file can be understood easily splitting the file on two parts. The first one describe the [target](#acceptedtargetvalues) of this rule, what do you want to verify, to be precise what kind of token do you want to check (e.g: Variables, macros, functions, etc.).
+Rule file can be understood easily splitting the file on two parts. The first one describe the [target](#accepted-criterion-target-values) of this rule, what do you want to verify, to be precise what kind of token do you want to check (e.g: Variables, macros, functions, etc.).
 
 
 The second part, is about the **criterion** that you want to use to validade the target token. An object is used to agrupate criterion data.
