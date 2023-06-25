@@ -12,10 +12,10 @@ class RulesReservedKeys():
     TARGET_NAME = "target"
 
     TARGET_TYPE_NONE = "none"
-    TARGET_TYPE_METHODS = "methods"
+    TARGET_TYPE_METHODS = "functions"
     TARGET_TYPE_GLOBALS = "globals"
     TARGET_TYPE_VARIABLES = "variables"
-    TARGET_TYPE_DEFINES = "defines"
+    TARGET_TYPE_DEFINES = "macros"
 
 
     '''
