@@ -14,9 +14,9 @@ from c_custom_code_checker.utlis.console_utils import print_process
 
 class CodeParser():
    
-  def __init__(self,rules) -> None:
-    self.__OS_PLATFORM = platform.system()
-    #clang.cindex.Config.set_library_path(os.getenv("LIBCLANG_LIBRARY_PATH"))
+  def __init__(self,rules,clang_path) -> None:
+    #self.__OS_PLATFORM = platform.system()
+    clang.cindex.Config.set_library_path(clang_path)
     
     self.__rules = rules
 

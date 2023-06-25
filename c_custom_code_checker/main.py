@@ -14,8 +14,9 @@ from c_custom_code_checker.utlis.files_utils import search_files_by_keyword
 
 
 ruleParser = RuleParser()
+lib_clang_path = None
 
-def is_libclang_available():
+def get_libclang_install_dir():
     path_env = os.getenv("PATH")
     platform_name = platform.system()
 
@@ -26,19 +27,22 @@ def is_libclang_available():
             if(platform_name == "Windows"):
                 libclang_path = os.path.join(path, "libclang.dll")  
                 if os.path.isfile(libclang_path):
-                    return True
+                    return path
             else:
                 libclang_path = os.path.join(path, "libclang.so")  
                 if os.path.isfile(libclang_path):
-                    return True
-    return False
+                    return path
+    return None
 
 
 
 def check_prerequisites():
 
+    global lib_clang_path
+    
     #check if there is libclang environment variable
-    if (is_libclang_available() == False):
+    lib_clang_path = get_libclang_install_dir()
+    if (lib_clang_path == None):
         raise LibClangNotFoundException()
     
 
@@ -59,9 +63,11 @@ def check_rules(files,rules_directory):
 
 def check_code(files,rules):
 
+    global lib_clang_path
+
     print_process(StringsConstants.CODE_CHECKING_TITLE)
 
-    code_parser = CodeParser(rules)
+    code_parser = CodeParser(rules,lib_clang_path)
     pbar = tqdm(files)
 
     for code in pbar:

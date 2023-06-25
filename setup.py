@@ -4,7 +4,7 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='c-validator',
+    name='c-custom-code-checker',
     version='1.0.0',
     packages=find_packages(),
     entry_points={

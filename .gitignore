@@ -30,3 +30,9 @@ rules
 
 #code folder
 code
+
+#dist folder
+dist
+
+#python dist files
+*.egg-info
