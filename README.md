@@ -107,7 +107,7 @@ It's a simple JSON object with two reserved keys, **target** to indicate what ki
 |   "globals"        |   This rule target are the global variables                |
 |   "variables"      |   This rule target are the local variables                 |
 |   "macros"          |  This rule target are Macros declarations                     |
-
+|   "enums"          |  This rule target are enums declaration                      |
 
 ## Contributing
 
