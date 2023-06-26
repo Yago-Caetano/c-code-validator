@@ -16,6 +16,7 @@ class RulesReservedKeys():
     TARGET_TYPE_GLOBALS = "globals"
     TARGET_TYPE_VARIABLES = "variables"
     TARGET_TYPE_DEFINES = "macros"
+    TARGET_TYPE_ENUMS = "enums"
 
 
     '''

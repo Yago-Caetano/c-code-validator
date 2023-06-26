@@ -4,6 +4,7 @@ import glob
 import platform
 
 from tqdm import tqdm
+
 from c_custom_code_checker.constants.strings import StringsConstants
 from c_custom_code_checker.exceptions.lib_clang_not_found_exception import LibClangNotFoundException
 
