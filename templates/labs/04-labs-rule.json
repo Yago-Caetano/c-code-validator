@@ -1,0 +1,9 @@
+{
+    "target":["variables","globals","defines"],
+    "description": "Variable declaration name must have length lower than 31 bytes",
+    "criterion":{
+        "target":"length_less_than",
+        "value": 31
+    }
+
+}

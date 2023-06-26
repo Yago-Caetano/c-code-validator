@@ -1,0 +1,9 @@
+{
+    "target":["enums"],
+    "description": "Enums names must be in uppercase",
+    "criterion":{
+        "target":"regex",
+        "value": "^[A-Z_]+$"
+    }
+
+}

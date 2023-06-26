@@ -1,0 +1,9 @@
+{
+    "target":["enums"],
+    "description": "Enums names must be \"ENUM_\" as prefix",
+    "criterion":{
+        "target":"prefix",
+        "value": "ENUM_"
+    }
+
+}

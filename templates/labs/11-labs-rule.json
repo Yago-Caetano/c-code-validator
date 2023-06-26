@@ -1,0 +1,9 @@
+{
+    "target":"globals",
+    "description": "Global variables must start with \"g\" preffix",
+    "criterion":{
+        "target":"prefix",
+        "value": "g"
+    }
+
+}

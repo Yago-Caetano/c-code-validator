@@ -1,0 +1,8 @@
+{
+    "target":["variables","globals","defines"],
+    "description": "Variable declaration name must have a length bigger than 3 bytes",
+    "criterion":{
+        "target":"length_bigger_than",
+        "value": 3
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "target":["globals","variables","defines"],
+    "description": "Numeric characters are not allowed on variable names",
+    "criterion":{
+        "target":"regex",
+        "value": "^[A-Za-z_]+$"
+    }
+
+}

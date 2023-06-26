@@ -1,0 +1,9 @@
+{
+    "target":["globals","variables"],
+    "description": "Upper-case characters and numeric value are not allowed to use in this node",
+    "criterion":{
+        "target":"regex",
+        "value": "^[a-z_]+$"
+    }
+
+}

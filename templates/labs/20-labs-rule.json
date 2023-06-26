@@ -1,0 +1,9 @@
+{
+    "target":["macros"],
+    "description": "Macros names must be composed by upper case characters",
+    "criterion":{
+        "target":"regex",
+        "value": "^[A-Z_]+$"
+    }
+
+}
