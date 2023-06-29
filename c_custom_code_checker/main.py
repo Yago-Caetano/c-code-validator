@@ -16,6 +16,7 @@ from c_custom_code_checker.utlis.files_utils import search_files_by_keyword
 
 ruleParser = RuleParser()
 lib_clang_path = None
+show_complete_log = True
 
 def get_libclang_install_dir():
     path_env = os.getenv("PATH")
@@ -48,42 +49,59 @@ def check_prerequisites():
     
 
 def check_rules(files,rules_directory):
+
+    global show_complete_log
     rules = []
+
     ret_files = search_files_by_keyword(rules_directory,"rule","json")
 
     if(len(ret_files) == 0):
         print_failure(StringsConstants.NO_RULES_FOUND)
         return -1
     
-    pbar = tqdm(ret_files)
-    for file in pbar:
-        pbar.set_description(f'Reading rule: {file}')
-        rules.append(ruleParser.parse_file(file))
+    if(show_complete_log == True):
+        pbar = tqdm(ret_files)
+        for file in pbar:
+            pbar.set_description(f'Reading rule: {file}')
+            rules.append(ruleParser.parse_file(file))
+    else:
+        for file in ret_files:
+            rules.append(ruleParser.parse_file(file))
 
     return rules
 
 def check_code(files,rules):
 
     global lib_clang_path
+    global show_complete_log
 
-    print_process(StringsConstants.CODE_CHECKING_TITLE)
+    if(show_complete_log == True):
+        print_process(StringsConstants.CODE_CHECKING_TITLE)
 
-    code_parser = CodeParser(rules,lib_clang_path)
-    pbar = tqdm(files)
+        code_parser = CodeParser(rules,lib_clang_path)
+        pbar = tqdm(files)
 
-    for code in pbar:
-        pbar.set_description(f"{code}")
-        code_parser.parse_code_file(code)
+        for code in pbar:
+            pbar.set_description(f"{code}")
+            code_parser.parse_code_file(code)
+    else:
+        code_parser = CodeParser(rules,lib_clang_path)
+
+        for code in files:
+            code_parser.parse_code_file(code)
 
 
 def startup(files,rules_directory):
+
+    global show_complete_log
 
     try:
 
         check_prerequisites()
 
-        print_header()
-        print_process(StringsConstants.PARSING_RULES_TITLE)
+        if(show_complete_log == True):
+            print_header()
+            print_process(StringsConstants.PARSING_RULES_TITLE)
 
         rules = check_rules(files,rules_directory)
 
@@ -91,8 +109,9 @@ def startup(files,rules_directory):
         print_exception(e)
         print_failure(StringsConstants.RULE_PARSING_FAILED)
         return -1
-
-    print_success(StringsConstants.RULE_PARSING_SUCCEDED)
+    
+    if(show_complete_log == True):
+        print_success(StringsConstants.RULE_PARSING_SUCCEDED)
 
     try:
         check_code(files,rules)
@@ -108,6 +127,7 @@ def main():
     parser = argparse.ArgumentParser(description=StringsConstants.TITLE)
     parser.add_argument("--input","-i",nargs="+",help="List of C files to analyse",required=True)
     parser.add_argument("--rules_path","-r",help="Path to rules",required=True)
+    parser.add_argument("--simple_out","-s",help="Shows a simple output, only containing relevant data",required=False,action='store_false')
 
     args = parser.parse_args()
 
@@ -126,6 +146,11 @@ def main():
             in_files.append(input_record)
 
     rules_path = args.rules_path
+
+    global show_complete_log
+
+    if(args.simple_out != None):
+        show_complete_log = args.simple_out
 
     return startup(in_files,rules_path)
 
